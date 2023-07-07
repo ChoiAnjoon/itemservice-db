@@ -42,7 +42,7 @@ public class JdbcTemplateItemRepositoryV3 implements ItemRepository {
     @Override
     public Item save(Item item) {
         SqlParameterSource param = new BeanPropertySqlParameterSource(item);
-        Number key = jdbcInsert.executeAndReturnKey(param);
+        Number key = jdbcInsert.executeAndReturnKey(param); // insert SQL 실행, 생성된 키 값도 편리하게 조회 가능
         item.setId(key.longValue());
         return item;
     }
@@ -109,5 +109,8 @@ public class JdbcTemplateItemRepositoryV3 implements ItemRepository {
     // resultSet 을 item 객체로 변환
     private RowMapper<Item> itemRowMapper() {
         return BeanPropertyRowMapper.newInstance(Item.class); // camel 변환 지원
+        // select item_name의 경우 setItem_name() 메서드가 없다, 이 경우 select item_name as itemName 변경으로 문제를 해결 할 수 있다.
+        // 하지만 BeanPropertyRowMapper는 select item_name으로 조회 해도 setItemName()에 문제 없이 값이 잘 들어간다.
+        // 정리하자면 snake_case는 자동으로 해결되니 그냥 두면 되고, DB의 컬럼이름과 객체 이름이 완전히 다른 경우에는 SQL에서 ALIAS를 이용
     }
 }

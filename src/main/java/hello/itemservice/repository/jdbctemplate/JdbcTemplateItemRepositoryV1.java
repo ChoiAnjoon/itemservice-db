@@ -64,7 +64,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         String sql = "select id, item_name, price, quantity from item where id = ?";
 
         // queryForObject는 결과가 없으면 EmptyResultDataAccessException 예외가 터짐
-        // queryForObject는 하나 가져올때
+        // queryForObject는 결과 로우가 하나일때 사용
         try {
             Item item = template.queryForObject(sql, itemRowMapper(), id);
             return Optional.of(item);
@@ -99,7 +99,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         }
         log.info("sql={}", sql);
 
-        // query는 여러값을 가져올때
+        // query는 결과가 하나 이상일때 사용한다. (데이터를 list로 조회)
         return template.query(sql, itemRowMapper(), param.toArray());
     }
 
