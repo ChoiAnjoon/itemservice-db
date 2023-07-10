@@ -18,6 +18,7 @@ import java.util.Optional;
 public class JpaItemRepositoryV2 implements ItemRepository {
 
     private final SpringDataJpaItemRepository repository;
+    //SpringDataJpaItemRepository 는 스프링 데이터 JPA가 프록시 기술로 만들어주고 스프링 빈으로도 등록해준다.
 
     @Override
     public Item save(Item item) {

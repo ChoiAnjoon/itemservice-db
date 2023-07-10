@@ -16,7 +16,7 @@ public class Item {
     private Integer price;
     private Integer quantity;
 
-    public Item() {
+    public Item() { // JPA는 public 또는 protected의 기본 생성자가 필수
     }
 
     public Item(String itemName, Integer price, Integer quantity) {

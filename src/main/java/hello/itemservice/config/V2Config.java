@@ -18,8 +18,8 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 public class V2Config {
 
-    private final EntityManager em;
-    private final ItemRepositoryV2 itemRepositoryV2; // 스프링이 직접 제공 (spring data Jpa)
+    private final EntityManager em; // 스프링이 자동으로 spring bean에 등록
+    private final ItemRepositoryV2 itemRepositoryV2; // 스프링이 직접 자동으로 spring bean에 등록 (spring data Jpa)
 
     @Bean
     public ItemService itemService() {

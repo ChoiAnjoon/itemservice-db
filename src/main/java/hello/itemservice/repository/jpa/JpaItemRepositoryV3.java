@@ -72,7 +72,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
                 .select(item)
                 .from(item)
                 .where(builder)
-                .fetch();
+                .fetch(); // fetch라 하면 List가 나옴
 
         return result;
     }
@@ -87,7 +87,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
                 .select(item)
                 .from(item)
                 .where(likeItemName(itemName), maxPrice(maxPrice)) // ,는 sql의 and 조건이 된다.
-                .fetch();
+                .fetch(); // fetch라 하면 List가 나옴
     }
 
     private BooleanExpression likeItemName(String itemName) {
