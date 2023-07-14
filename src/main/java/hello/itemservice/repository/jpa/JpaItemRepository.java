@@ -18,7 +18,8 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @Transactional // jpa의 모든 데이터 변경은 transaction 안에서 이뤄진다.
-// @Repository, @Transactional 이 두개를 넣으면 AOP에서 트랜잭션도 적용하고 Jpa 예외를 스프링 예외에 맞게 변환해 준다
+// @Transactional AOP에서 트랜잭션 적용
+// @Repository 컴포넌트 스캔 이외에도 Jpa 예외를 스프링 예외에 맞게 변환 (예외 변환 AOP의 적용대상이 된다.)
 public class JpaItemRepository implements ItemRepository {
 
     private final EntityManager em;
