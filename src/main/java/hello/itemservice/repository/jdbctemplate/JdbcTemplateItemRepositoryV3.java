@@ -67,6 +67,7 @@ public class JdbcTemplateItemRepositoryV3 implements ItemRepository {
         String sql = "select id, item_name, price, quantity from item where id = :id";
 
         // queryForObject는 결과가 없으면 EmptyResultDataAccessException 예외가 터짐
+        // 결과가 둘 이상이면 IncorrectResultSizeDataAccessException 예외가 발생한다.
         // queryForObject는 하나 가져올때
         try {
             Map<String, Object> param = Map.of("id", id);

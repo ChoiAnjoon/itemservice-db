@@ -19,6 +19,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
+    // 제품 목록 페이지
     @GetMapping
     public String items(@ModelAttribute("itemSearch") ItemSearchCond itemSearch, Model model) {
         List<Item> items = itemService.findItems(itemSearch);
@@ -26,6 +27,7 @@ public class ItemController {
         return "items";
     }
 
+    // 상품 상세
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
         Item item = itemService.findById(itemId).get();
@@ -33,11 +35,13 @@ public class ItemController {
         return "item";
     }
 
+    // 상품 등록 폼 보여주기
     @GetMapping("/add")
     public String addForm() {
         return "addForm";
     }
 
+    // 회원이 등록한 상품을 저장, 상품 상세로 redirect
     @PostMapping("/add")
     public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
         Item savedItem = itemService.save(item);
@@ -46,6 +50,7 @@ public class ItemController {
         return "redirect:/items/{itemId}";
     }
 
+    // 상품 수정 폼 보여주기
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemService.findById(itemId).get();
@@ -53,6 +58,7 @@ public class ItemController {
         return "editForm";
     }
 
+    // 회원이 수정한 데이터를 update, 상품 상세로 redirect
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @ModelAttribute ItemUpdateDto updateParam) {
         itemService.update(itemId, updateParam);
